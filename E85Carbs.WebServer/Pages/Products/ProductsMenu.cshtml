@@ -27,6 +27,17 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
+            <form method="post" asp-page-handler="Submit">
+                <label>Brands</label>
+                <select asp-items="Model.MakeDropdownList" asp-for="makeName"></select><br />
+                <label>Categories</label>
+                <select asp-items="Model.CategoryDropdownList" asp-for="categoryName"></select><br />
+                <input type="submit" value="Submit" class="btn btn-info">
+            </form>
+            <div></div>
+            <form method="get">
+                <input type="submit" value="Reset" class="btn btn-warning">
+            </form>
             <h2 class="mt-4 mb-4">Products</h2>
         </div>
         @foreach (var product in Model.Products)

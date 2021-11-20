@@ -31,15 +31,36 @@ namespace E85Carbs.WebServer.Pages.Products
         [BindProperty]
         public string categoryName { get; set; }
 
+        [BindProperty]
+        public Product product { get; set; }
+
+        [BindProperty]
+        public Make Make { get; set; }
+
+        [BindProperty]
+        public Category Category { get; set; }
+
+        [BindProperty]
+        public string makeName { get; set; }
+
+        [BindProperty]
+        public string categoryName { get; set; }
+
+        public List<SelectListItem> CategoryDropdownList { get; set; } = new List<SelectListItem>();
+        public List<SelectListItem> MakeDropdownList { get; set; } = new List<SelectListItem>();
+
         private readonly ProductService _service;
         private readonly CategoryService _categoryservice;
         private readonly MakeService _makeservice;
         private readonly ILogger<ProductsMenuModel> _logger;
         public ApplicationDbContext _context;
+<<<<<<< HEAD
         public List<SelectListItem> CategoryDropdownList { get; set; } = new List<SelectListItem>();
         public List<SelectListItem> MakeDropdownList { get; set; } = new List<SelectListItem>();
 
 
+=======
+>>>>>>> ce358c4b72b3e5a240c4239770476de1c78480a1
         public ProductsMenuModel(ProductService service, ILogger<ProductsMenuModel> logger, ApplicationDbContext context, CategoryService categoryservice, MakeService makeservice)
         {
             _service = service;
@@ -57,6 +78,28 @@ namespace E85Carbs.WebServer.Pages.Products
             MakeDropdownList = _makeservice.MakeDropDownList();
             MakeDropdownList.Insert(0, new SelectListItem("Select one", null, false));
             Products = _service.GetAllProducts();
+            
+        }
+
+        public void OnPost()
+        {
+
+            if (makeName != "Select one" && categoryName == "Select one")
+            {
+                Products = _service.GetFilteredProductsByMake(makeName);
+            }
+            else if (categoryName != "Select one" && makeName == "Select one")
+            {
+                Products = _service.GetFilteredProductsByCategory(categoryName);
+            }
+            else if (makeName != "Select one" && categoryName != "Select one")
+            {
+                Products = _service.GetFilteredProductsByCatMake(categoryName, makeName);
+            }
+            else
+            {
+                RedirectToPage("../Products/ProductsMenu");
+            }
         }
 
         public void OnPost()
