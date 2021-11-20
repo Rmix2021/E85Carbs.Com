@@ -1,29 +1,31 @@
 using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 using E85Carbs.WebServer.Models;
-using E85Carbs.WebServer.Data;
 using E85Carbs.WebServer.Services;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using E85Carbs.WebServer.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
-
 
 namespace E85Carbs.WebServer.Pages.Products
 {
     [Authorize("AdminOnly")]
-    public class ProductsMenuModel : PageModel
+    public class EditPricesByMakeCatModel : PageModel
     {
         [BindProperty]
-        public List<Product> Products { get; set; }
+        public Product Product { get; set; }
+
         [BindProperty]
-        public Product product { get; set; }
+        public int productid { get; set; }
+
+        [BindProperty]
+        public List<Product> Products { get; set; }
 
         [BindProperty]
         public string makeName { get; set; }
@@ -31,25 +33,25 @@ namespace E85Carbs.WebServer.Pages.Products
         [BindProperty]
         public string categoryName { get; set; }
 
-        private readonly ProductService _service;
-        private readonly CategoryService _categoryservice;
-        private readonly MakeService _makeservice;
-        private readonly ILogger<ProductsMenuModel> _logger;
-        public ApplicationDbContext _context;
+        [BindProperty]
+        public double percentAdjust { get; set; }
+
         public List<SelectListItem> CategoryDropdownList { get; set; } = new List<SelectListItem>();
         public List<SelectListItem> MakeDropdownList { get; set; } = new List<SelectListItem>();
 
-
-        public ProductsMenuModel(ProductService service, ILogger<ProductsMenuModel> logger, ApplicationDbContext context, CategoryService categoryservice, MakeService makeservice)
+        private readonly ProductService _service;
+        private readonly CategoryService _categoryservice;
+        private readonly MakeService _makeservice;
+        private readonly ILogger<EditPricesByMakeCatModel> _logger;
+        public ApplicationDbContext _context;
+        public EditPricesByMakeCatModel(ProductService service, ILogger<EditPricesByMakeCatModel> logger, ApplicationDbContext context, CategoryService categoryservice, MakeService makeservice)
         {
             _service = service;
-            _makeservice = makeservice;
-            _categoryservice = categoryservice;
             _logger = logger;
             _context = context;
-
+            _makeservice = makeservice;
+            _categoryservice = categoryservice;
         }
-
         public void OnGet()
         {
             CategoryDropdownList = _categoryservice.CategoryDropDownList();
@@ -59,25 +61,28 @@ namespace E85Carbs.WebServer.Pages.Products
             Products = _service.GetAllProducts();
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
-
-            if (makeName != "Select one" && categoryName == "Select one")
+            if (makeName != "Select one" && categoryName == "Select one")                
             {
-                Products = _service.GetFilteredProductsByMake(makeName);
+                _service.UpdatePricingByMake(makeName, percentAdjust);
+                return RedirectToPage("../Products/EditPricesByMakeCat");
             }
+
             else if (categoryName != "Select one" && makeName == "Select one")
             {
-                Products = _service.GetFilteredProductsByCategory(categoryName);
+                _service.UpdatePricingByCategory(categoryName, percentAdjust);
+                return RedirectToPage("../Products/EditPricesByMakeCat");
             }
             else if (makeName != "Select one" && categoryName != "Select one")
             {
-                Products = _service.GetFilteredProductsByCatMake(categoryName, makeName);
+                _service.UpdatePricingByMakeCat(categoryName, makeName, percentAdjust);
+                return RedirectToPage("../Products/EditPricesByMakeCat");
             }
             else
             {
-                RedirectToPage("../Store/StoreMainPage");
-            }
+                return RedirectToPage("../Products/EditPricesByMakeCat");
+            }            
         }
     }
 }

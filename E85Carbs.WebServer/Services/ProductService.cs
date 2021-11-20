@@ -64,5 +64,38 @@ namespace E85Carbs.WebServer.Services
 
         }
 
+        public void UpdatePricingByMake(string makename, double percentAdjust)
+        {
+            List<Product> ProductList = GetFilteredProductsByMake(makename);
+            foreach (var product in ProductList)
+            {
+                product.ProductPrice = product.ProductPrice * percentAdjust;
+                _context.SaveChanges();
+            }
+           
+        }
+
+        public void UpdatePricingByCategory(string categoryname, double percentAdjust)
+        {
+            List<Product> ProductList = GetFilteredProductsByCategory(categoryname);
+            foreach (var product in ProductList)
+            {
+                product.ProductPrice = product.ProductPrice * percentAdjust;
+                _context.SaveChanges();
+            }
+        }
+
+        public void UpdatePricingByMakeCat(string categoryname, string makename, double percentAdjust)
+        {
+            List<Product> ProductList = GetFilteredProductsByCatMake(categoryname, makename);
+            foreach (var product in ProductList)
+            {
+                product.ProductPrice = product.ProductPrice * percentAdjust;
+                _context.SaveChanges();
+
+            }
+        }
+
+
     }
 }
