@@ -10,43 +10,40 @@ using Microsoft.EntityFrameworkCore;
 using E85Carbs.WebServer.Models;
 using E85Carbs.WebServer.Services;
 using E85Carbs.WebServer.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 
 namespace E85Carbs.WebServer.Pages.CustomerBuilds
 {
-    [Authorize("AdminOnly")]
-    public class DeleteCustomerBuildModel : PageModel
+    public class CustomerBuildDetailsModel : PageModel
     {
         [BindProperty]
-        public CustomerBuild customerBuild { get; set; }
+        public CustomerBuild CustomerBuild { get; set; }
 
         [BindProperty]
         public int customerBuildid { get; set; }
 
         [BindProperty]
         public List<CustomerBuild> CustomerBuilds { get; set; }
+        [BindProperty]
+        public List<BuildGalleryImage> BuildGalleryImages { get; set; }
 
         private readonly CustomerBuildsService _customerBuildsService;
-        private readonly ILogger<DeleteCustomerBuildModel> _logger;
+        private readonly BuildGalleryImageService _buildGalleryImageService;
+        private readonly ILogger<CustomerBuildDetailsModel> _logger;
         public ApplicationDbContext _context;
-        public DeleteCustomerBuildModel(CustomerBuildsService service, ILogger<DeleteCustomerBuildModel> logger, ApplicationDbContext context)
+        public CustomerBuildDetailsModel(CustomerBuildsService customerBuildsService, ILogger<CustomerBuildDetailsModel> logger, ApplicationDbContext context, BuildGalleryImageService buildGalleryImageService)
         {
-            _customerBuildsService = service;
+            _customerBuildsService = customerBuildsService;
+            _buildGalleryImageService = buildGalleryImageService;
             _logger = logger;
             _context = context;
         }
 
         public void OnGet(int id)
         {
-            customerBuild = _customerBuildsService.GetACustomerBuild(id);
-        }
-
-        public IActionResult OnPostDelete(int id)
-        {
-            var customerBuild = _context.customerBuilds.Find(id);
-            _context.Remove(customerBuild);
-            _context.SaveChanges();
-            return Redirect("../CustomerBuildsMenu");
+            CustomerBuild = _customerBuildsService.GetACustomerBuild(id);
+            BuildGalleryImages = _buildGalleryImageService.GetAllFilteredBuildGalleryImages(id);
         }
     }
 }

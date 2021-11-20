@@ -20,14 +20,7 @@ namespace E85Carbs.WebServer.Pages.CustomerBuilds
     public class AddCustomerBuildModel : PageModel
     {
         [BindProperty]
-        public AddCustomerBuild Input { get; set; }
-
-
-        private readonly ProductService _productservice;
-
-        private readonly CategoryService _categoryservice;
-
-        private readonly MakeService _makeservice;
+        public AddCustomerBuild Input { get; set; }       
 
         private readonly CustomerBuildsService _customerBuildsService;
 

@@ -57,6 +57,8 @@ namespace E85Carbs.WebServer.Data
             modelBuilder.Entity<Product>().Property(p => p.MainProductImage).HasColumnType("MediumBlob");
             modelBuilder.Entity<ProductGalleryImage>().Property(p => p.ProductGalleryByte).HasColumnType("MediumBlob");
             modelBuilder.Entity<CustomerBuild>().Property(p => p.MainBuildImage).HasColumnType("MediumBlob");
+            modelBuilder.Entity<BuildGalleryImage>().Property(p => p.BuildGalleryByte).HasColumnType("MediumBlob");
+
 
 
             modelBuilder.Entity<IdentityRole>().HasData

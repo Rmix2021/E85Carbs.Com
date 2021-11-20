@@ -13,7 +13,7 @@
     <form method="post" enctype="multipart/form-data" asp-page-handler="Submit">
         <label>Photo Name:</label>
         <input type="text" value="Photo Name" asp-for="@Model.Input.ProductGalleryImageName"><br />
-        <label>Product Main Image:</label>
+        <label>Product Gallery Image:</label>
         <input type="file" asp-for="@Model.Input.ProductGalleryByte">
         <input type="hidden"  asp-for="@Model.productid"><br />
         <input type="submit" value="Submit" class="text-success">

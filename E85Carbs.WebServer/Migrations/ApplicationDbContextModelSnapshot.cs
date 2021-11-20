@@ -25,7 +25,7 @@ namespace E85Carbs.WebServer.Migrations
 
                     b.Property<byte[]>("BuildGalleryByte")
                         .IsRequired()
-                        .HasColumnType("varbinary(4000)");
+                        .HasColumnType("MediumBlob");
 
                     b.Property<string>("BuildGalleryImageName")
                         .IsRequired()
@@ -38,7 +38,7 @@ namespace E85Carbs.WebServer.Migrations
 
                     b.HasIndex("CustomerBuildId");
 
-                    b.ToTable("BuildGalleryImage");
+                    b.ToTable("buildGalleryImages");
                 });
 
             modelBuilder.Entity("E85Carbs.WebServer.Data.CartItem", b =>
@@ -107,7 +107,7 @@ namespace E85Carbs.WebServer.Migrations
 
                     b.HasKey("CustomerBuildId");
 
-                    b.ToTable("CustomerBuild");
+                    b.ToTable("customerBuilds");
                 });
 
             modelBuilder.Entity("E85Carbs.WebServer.Data.Make", b =>
@@ -229,7 +229,7 @@ namespace E85Carbs.WebServer.Migrations
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "b23d58c2-36b1-44a1-a782-fdf8795c1956",
+                            ConcurrencyStamp = "f5355d28-4c07-46e1-925f-a4b3caca1c4b",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -336,15 +336,15 @@ namespace E85Carbs.WebServer.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "88545b7c-2cca-4040-bc8a-6a87bf26895a",
+                            ConcurrencyStamp = "89150396-8f06-4ec4-9eca-1062017c5fd6",
                             Email = "eurotuner1981@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EUROTUNER1981@GMAIL.COM",
                             NormalizedUserName = "EUROTUNER1981@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPpMMmtgDuLMIhMV5D3oSdfcuQmu7QoUsIZMywvTOSyebt34HgiamOUnEQzLH/rFtg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELa3H/ruNLAYxdXjzTYaMDg1KIMinluefynaWEJwaflaDzqRDAlmOyCFpKL3nE/PJw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5c9ed07e-e7ae-4f19-b5c6-1f76f575f9c1",
+                            SecurityStamp = "fe2f7485-9fc0-494d-a796-5b4f9726e99d",
                             TwoFactorEnabled = false,
                             UserName = "eurotuner1981@gmail.com"
                         });

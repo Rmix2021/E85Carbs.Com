@@ -61,6 +61,22 @@ namespace E85Carbs.WebServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "customerBuilds",
+                columns: table => new
+                {
+                    CustomerBuildId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    CustomerName = table.Column<string>(type: "text", nullable: false),
+                    CustomerBuildTitle = table.Column<string>(type: "text", nullable: false),
+                    CustomerBuildDescription = table.Column<string>(type: "text", nullable: false),
+                    MainBuildImage = table.Column<byte[]>(type: "MediumBlob", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_customerBuilds", x => x.CustomerBuildId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Makes",
                 columns: table => new
                 {
@@ -82,7 +98,7 @@ namespace E85Carbs.WebServer.Migrations
                     ProductName = table.Column<string>(type: "text", nullable: false),
                     ProductPrice = table.Column<double>(type: "double", nullable: false),
                     ProductDescription = table.Column<string>(type: "text", nullable: false),
-                    MainProductImage = table.Column<byte[]>(type: "varbinary(4000)", nullable: false),
+                    MainProductImage = table.Column<byte[]>(type: "MediumBlob", nullable: false),
                     CategoryName = table.Column<string>(type: "text", nullable: true),
                     MakeName = table.Column<string>(type: "text", nullable: true)
                 },
@@ -212,13 +228,34 @@ namespace E85Carbs.WebServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "buildGalleryImages",
+                columns: table => new
+                {
+                    BuildGalleryImageId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    BuildGalleryImageName = table.Column<string>(type: "text", nullable: false),
+                    BuildGalleryByte = table.Column<byte[]>(type: "MediumBlob", nullable: false),
+                    CustomerBuildId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_buildGalleryImages", x => x.BuildGalleryImageId);
+                    table.ForeignKey(
+                        name: "FK_buildGalleryImages_customerBuilds_CustomerBuildId",
+                        column: x => x.CustomerBuildId,
+                        principalTable: "customerBuilds",
+                        principalColumn: "CustomerBuildId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "productGalleryImages",
                 columns: table => new
                 {
                     ProductGalleryImageId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     ProductGalleryImageName = table.Column<string>(type: "text", nullable: false),
-                    ProductGalleryByte = table.Column<byte[]>(type: "varbinary(4000)", nullable: false),
+                    ProductGalleryByte = table.Column<byte[]>(type: "MediumBlob", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -263,12 +300,12 @@ namespace E85Carbs.WebServer.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "2c5e174e-3b0e-446f-86af-483d56fd7210", "e5b4c203-bafc-4d6e-86ed-46201ad62eb6", "Administrator", "ADMINISTRATOR" });
+                values: new object[] { "2c5e174e-3b0e-446f-86af-483d56fd7210", "f5355d28-4c07-46e1-925f-a4b3caca1c4b", "Administrator", "ADMINISTRATOR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "9aba6098-e3ea-4270-8296-e2de61016138", "eurotuner1981@gmail.com", true, false, null, "EUROTUNER1981@GMAIL.COM", "EUROTUNER1981@GMAIL.COM", "AQAAAAEAACcQAAAAEIxgchOeJqavd5Ol84htoDSlh9y8h2DAeAjHcqa2Zv2LaKPakH0H7alPMDL7d6UgvQ==", null, false, "2e7ad0e8-7245-4c76-9ca1-03c4288d8411", false, "eurotuner1981@gmail.com" });
+                values: new object[] { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "89150396-8f06-4ec4-9eca-1062017c5fd6", "eurotuner1981@gmail.com", true, false, null, "EUROTUNER1981@GMAIL.COM", "EUROTUNER1981@GMAIL.COM", "AQAAAAEAACcQAAAAELa3H/ruNLAYxdXjzTYaMDg1KIMinluefynaWEJwaflaDzqRDAlmOyCFpKL3nE/PJw==", null, false, "fe2f7485-9fc0-494d-a796-5b4f9726e99d", false, "eurotuner1981@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoleClaims",
@@ -323,6 +360,11 @@ namespace E85Carbs.WebServer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_buildGalleryImages_CustomerBuildId",
+                table: "buildGalleryImages",
+                column: "CustomerBuildId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CartItems_ProductId",
                 table: "CartItems",
                 column: "ProductId");
@@ -356,6 +398,9 @@ namespace E85Carbs.WebServer.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "buildGalleryImages");
+
+            migrationBuilder.DropTable(
                 name: "CartItems");
 
             migrationBuilder.DropTable(
@@ -372,6 +417,9 @@ namespace E85Carbs.WebServer.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "customerBuilds");
 
             migrationBuilder.DropTable(
                 name: "ShoppingCarts");

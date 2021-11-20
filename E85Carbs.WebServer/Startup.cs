@@ -77,6 +77,8 @@ namespace E85Carbs.WebServer
             services.AddScoped<ProductGalleryImageService>();
             services.AddScoped<ShoppingCartService>();
             services.AddScoped<CartItemService>();
+            services.AddScoped<CustomerBuildsService>();
+            services.AddScoped<BuildGalleryImageService>();
             services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
             services.AddSingleton<IAuthorizationHandler, IsUserHandler>();
 

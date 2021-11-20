@@ -25,8 +25,8 @@ namespace E85Carbs.WebServer.Models
         [Required]
         public string CustomerBuildDescription { get; set; }
 
-        [Required]
-        public byte[] MainBuildImage { get; set; }
+        //[Required]
+        //public byte[] MainBuildImage { get; set; }
 
         public IFormFile MainImageData { get; set; }
 
