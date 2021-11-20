@@ -29,22 +29,13 @@ namespace E85Carbs.WebServer.Pages.Products
         public string makeName { get; set; }
 
         [BindProperty]
-        public string categoryName { get; set; }
-
-        [BindProperty]
-        public Product product { get; set; }
+        public string categoryName { get; set; }      
 
         [BindProperty]
         public Make Make { get; set; }
 
         [BindProperty]
-        public Category Category { get; set; }
-
-        [BindProperty]
-        public string makeName { get; set; }
-
-        [BindProperty]
-        public string categoryName { get; set; }
+        public Category Category { get; set; }       
 
         public List<SelectListItem> CategoryDropdownList { get; set; } = new List<SelectListItem>();
         public List<SelectListItem> MakeDropdownList { get; set; } = new List<SelectListItem>();
@@ -54,13 +45,7 @@ namespace E85Carbs.WebServer.Pages.Products
         private readonly MakeService _makeservice;
         private readonly ILogger<ProductsMenuModel> _logger;
         public ApplicationDbContext _context;
-<<<<<<< HEAD
-        public List<SelectListItem> CategoryDropdownList { get; set; } = new List<SelectListItem>();
-        public List<SelectListItem> MakeDropdownList { get; set; } = new List<SelectListItem>();
 
-
-=======
->>>>>>> ce358c4b72b3e5a240c4239770476de1c78480a1
         public ProductsMenuModel(ProductService service, ILogger<ProductsMenuModel> logger, ApplicationDbContext context, CategoryService categoryservice, MakeService makeservice)
         {
             _service = service;
@@ -101,26 +86,6 @@ namespace E85Carbs.WebServer.Pages.Products
                 RedirectToPage("../Products/ProductsMenu");
             }
         }
-
-        public void OnPost()
-        {
-
-            if (makeName != "Select one" && categoryName == "Select one")
-            {
-                Products = _service.GetFilteredProductsByMake(makeName);
-            }
-            else if (categoryName != "Select one" && makeName == "Select one")
-            {
-                Products = _service.GetFilteredProductsByCategory(categoryName);
-            }
-            else if (makeName != "Select one" && categoryName != "Select one")
-            {
-                Products = _service.GetFilteredProductsByCatMake(categoryName, makeName);
-            }
-            else
-            {
-                RedirectToPage("../Store/StoreMainPage");
-            }
-        }
+        
     }
 }
