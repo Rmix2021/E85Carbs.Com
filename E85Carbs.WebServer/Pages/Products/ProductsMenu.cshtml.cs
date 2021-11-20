@@ -27,6 +27,12 @@ namespace E85Carbs.WebServer.Pages.Products
         public Product product { get; set; }
 
         [BindProperty]
+        public Make Make { get; set; }
+
+        [BindProperty]
+        public Category Category { get; set; }
+
+        [BindProperty]
         public string makeName { get; set; }
 
         [BindProperty]
@@ -57,6 +63,7 @@ namespace E85Carbs.WebServer.Pages.Products
             MakeDropdownList = _makeservice.MakeDropDownList();
             MakeDropdownList.Insert(0, new SelectListItem("Select one", null, false));
             Products = _service.GetAllProducts();
+            
         }
 
         public void OnPost()
