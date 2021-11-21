@@ -15,14 +15,20 @@
     </div>
 
     <div>
-        <div>
-            @foreach (var photo in Model.ProductGalleryImages)
-            {
-                <img class="img-fluid img-thumbnail" src="data:image/gif;base64,@photo.ProductGalleryBase64Image" alt="Card image cap">
-            }
+        <div class="carousel slide" data-ride="carousel" data-interval="2000" style="width:auto;">
+            <div class="carousel-inner">
+                @foreach (var photo in Model.ProductGalleryImages)
+                {
+                    <div class="carousel-item @(photo == Model.ProductGalleryImages.First() ? "active" : "")">
+                        <img src="data:image/gif;base64,@photo.ProductGalleryBase64Image">
+
+                    </div>
+                }
+            </div>
         </div>
+     
     </div>
-    <h3><a href="#" class="mt-2 text-danger">@Model.product.ProductName</a></h3>
+    <h3><a class="mt-2 text-danger">@Model.product.ProductName</a></h3>
     <p>@Model.product.MakeName</p>
     <p class="text-secondary">@Model.product.ProductDescription</p>
     <a asp-page="/AnonymousShoppingCart/ShoppingCart" asp-route-id="@Model.product.ProductId" class="btn btn-info float-left">Add to cart</a><br />
