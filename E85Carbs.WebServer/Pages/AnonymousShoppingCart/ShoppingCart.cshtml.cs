@@ -36,7 +36,8 @@ namespace E85Carbs.WebServer.Pages.AnonymousShoppingCart
         }
         public IActionResult OnGet(int ?id)
         {
-            string cartItems; 
+            string cartItems;
+            DateTime now = DateTime.Now;
             bool cookieCheck =  this.Request.Cookies.TryGetValue("cartItems", out cartItems); // checks for cookie y or n
 
             if(id != null && id != -1) // product id
@@ -45,12 +46,16 @@ namespace E85Carbs.WebServer.Pages.AnonymousShoppingCart
                 {
                     cartItems += "," + id.ToString(); // adding to cart seperating ids with ,
                     //maybe need to look into json conversion
+                    
                 }
                 else
                 {
                     cartItems = id.ToString();
+                    
                 }
+                
                 this.Response.Cookies.Append("cartItems", cartItems);
+                
                 return RedirectToPage("/AnonymousShoppingCart/ShoppingCart", new { id = -1}); // -1 is to skip adding to cart again
             }
 

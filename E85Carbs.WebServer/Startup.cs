@@ -54,6 +54,7 @@ namespace E85Carbs.WebServer
             //    // requires using Microsoft.AspNetCore.Http;
             //    options.MinimumSameSitePolicy = SameSiteMode.None;
             //});
+          
             services.AddMvc();
             services.AddRazorPages();
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -107,7 +108,7 @@ namespace E85Carbs.WebServer
 
             app.UseAuthentication();
             app.UseAuthorization();
-          
+           
             
             app.UseEndpoints(endpoints =>
             {

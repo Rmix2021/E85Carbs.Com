@@ -18,6 +18,7 @@
         if (cartItems.Contains(','))
         {
             ProductIds = cartItems.Split(',').ToList();
+            
             foreach(var PID in ProductIds)
             {
                 if (productQuantity.ContainsKey(PID))

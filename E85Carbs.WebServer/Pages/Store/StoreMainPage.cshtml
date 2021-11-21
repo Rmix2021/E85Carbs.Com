@@ -33,21 +33,20 @@
                         {
                             @foreach (var product in Model.Products)
                             {
-                                <div class="col-md-4 mt-2">
-                                    <div class="card flex-fill">
-                                        <div class="card-body">
-                                            <div class="card-img-actions"> <img src="data:image/gif;base64,@product.MainBase64Image" class="card-img img-fluid" width="96" height="350" alt=""> </div>
-                                        </div>
-                                        <div class="card-body bg-light text-center">
-                                            <div class="mb-2">
-                                                <h6 class="font-weight-semibold mb-2"> <a asp-page="/Store/ProductDetailsPage" asp-route-id="@product.ProductId" class="text-default mb-2" data-abc="true">@product.ProductName</a> </h6> <a href="#" class="text-muted" data-abc="true">@product.CategoryName</a>
-                                            </div>
-                                            <h3 class="mb-0 font-weight-semibold">$@product.ProductPrice</h3>
-                                        </div>
-                                    </div>
+                            <div class="col-md-3 mt-3 card flex-fill card-box card-body bg-light text-center">
+                                <div class="card-img-actions card-thumbnail">
+                                    <img src="data:image/gif;base64,@product.MainBase64Image" class="card-img img-fluid">
                                 </div>
-
-
+                                <div class="container-fluid flex-fill"></div>
+                                <div>
+                                    <div class="mb-2">
+                                        <h6 class="font-weight-semibold mb-2"> 
+                                            <a asp-page="/Store/ProductDetailsPage" asp-route-id="@product.ProductId" class="text-default mb-2" data-abc="true">@product.ProductName</a>
+                                        </h6> <a href="#" class="text-muted" data-abc="true">@product.CategoryName</a>
+                                    </div>
+                                    <h3 class="mb-0 font-weight-semibold">$@product.ProductPrice</h3>
+                                </div>
+                            </div>
                             }
                         }
                         else
