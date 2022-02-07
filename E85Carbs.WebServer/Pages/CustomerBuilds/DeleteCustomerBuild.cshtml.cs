@@ -46,7 +46,7 @@ namespace E85Carbs.WebServer.Pages.CustomerBuilds
             var customerBuild = _context.customerBuilds.Find(id);
             _context.Remove(customerBuild);
             _context.SaveChanges();
-            return Redirect("../CustomerBuildsMenu");
+            return Redirect("../CustomerBuildMenu");
         }
     }
 }

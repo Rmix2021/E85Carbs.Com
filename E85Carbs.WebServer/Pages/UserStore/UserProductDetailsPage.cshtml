@@ -19,19 +19,19 @@
             <div class="carousel-inner">
                 @foreach (var photo in Model.ProductGalleryImages)
                 {
-                <div class="carousel-item @(photo == Model.ProductGalleryImages.First() ? "active" : "")">
-                    <img src="data:image/gif;base64,@photo.ProductGalleryBase64Image">
-                    
-                </div>
+                    <div class="carousel-item @(photo == Model.ProductGalleryImages.First() ? "active" : "")">
+                        <img src="data:image/gif;base64,@photo.ProductGalleryBase64Image">
+
+                    </div>
                 }
             </div>
         </div>
         @*<div>
-            @foreach (var photo in Model.ProductGalleryImages)
-            {
-                <img class="img-fluid img-thumbnail" src="data:image/gif;base64,@photo.ProductGalleryBase64Image" alt="Card image cap">
-            }
-        </div>*@
+                @foreach (var photo in Model.ProductGalleryImages)
+                {
+                    <img class="img-fluid img-thumbnail" src="data:image/gif;base64,@photo.ProductGalleryBase64Image" alt="Card image cap">
+                }
+            </div>*@
     </div>
     <h3><a class="mt-2 text-danger">@Model.product.ProductName</a></h3>
     <p>@Model.product.MakeName</p>
@@ -42,3 +42,4 @@
     </form>
 </div>
 
+@*02.07.2022 RM Added Comments*@

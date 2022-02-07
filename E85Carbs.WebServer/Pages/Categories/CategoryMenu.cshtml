@@ -18,14 +18,15 @@
         <tbody>
             @foreach (var category in Model.Categories)
             {
-            <tr>
-                <td class="align-middle">@category.CategoryName</td>
-                <td><a asp-page="/Categories/EditCategory" asp-route-id="@category.CategoryID" class="btn btn-danger">Edit</a></td>
-                <td><a asp-page="/Categories/DeleteCategory" asp-route-id="@category.CategoryID" class="btn btn-danger">Remove</a></td>
-            </tr>
+                <tr>
+                    <td class="align-middle">@category.CategoryName</td>
+                    <td><a asp-page="/Categories/EditCategory" asp-route-id="@category.CategoryID" class="btn btn-danger">Edit</a></td>
+                    <td><a asp-page="/Categories/DeleteCategory" asp-route-id="@category.CategoryID" class="btn btn-danger">Remove</a></td>
+                </tr>
             }
         </tbody>
     </table>
 </div>
 <a asp-page="/Categories/AddCategory" class="btn btn-success">Add new Category</a>
 
+@*02.07.2022 RM Added Comments*@

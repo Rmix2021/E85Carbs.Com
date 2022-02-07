@@ -9,7 +9,7 @@
 <h1 class="text-info">@ViewData["Title"]</h1>
 <div>
     <div class="content">
-        <div class="col-md-9">           
+        <div class="col-md-9">
             <div class="customerbuilds">
                 <div class="row no-gutters">
                     @if (Model.CustomerBuilds.Count != 0)
@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="card-body bg-light text-center">
                                         <div class="mb-2">
-                                            <h6 class="font-weight-semibold mb-2"> <a asp-page="/CustomerBuilds/CustomerBuildDetails" asp-route-id="@customerbuild.CustomerBuildId" class="text-default mb-2" data-abc="true">@customerbuild.CustomerName</a> </h6> 
+                                            <h6 class="font-weight-semibold mb-2"> <a asp-page="/CustomerBuilds/CustomerBuildDetails" asp-route-id="@customerbuild.CustomerBuildId" class="text-default mb-2" data-abc="true">@customerbuild.CustomerName</a> </h6>
                                             <h3 class="text-muted" data-abc="true">@customerbuild.CustomerBuildTitle</h3>
                                         </div>
                                     </div>
@@ -43,3 +43,6 @@
         </div>
     </div>
 </div>
+
+
+@*02.07.2022 RM Added Comments*@

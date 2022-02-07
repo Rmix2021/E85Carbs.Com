@@ -35,17 +35,17 @@
             <div class="row no-gutters">
                 @foreach (var product in Model.Products)
                 {
-                <div class="col-md-3 mt-3 card flex-fill card-box card-body bg-light text-center">
-                    <div class="card-img-actions card-thumbnail">
-                        <img src="data:image/gif;base64,@product.MainBase64Image" class="card-img img-fluid">
+                    <div class="col-md-3 mt-3 card flex-fill card-box card-body bg-light text-center">
+                        <div class="card-img-actions card-thumbnail">
+                            <img src="data:image/gif;base64,@product.MainBase64Image" class="card-img img-fluid">
+                        </div>
+                        <div class="container-fluid flex-fill"></div>
+                        <h3><a href="#" class="mt-2 text-danger">@product.ProductName</a></h3>
+                        <p class="text-secondary">@product.ProductDescription</p>
+                        <a type="button" asp-page="/Products/DeleteProduct" asp-route-id="@product.ProductId" class="btn btn-danger float-left">Remove</a>
+                        <a type="button" asp-page="/Products/EditProduct" asp-route-id="@product.ProductId" class="btn btn-info float-left">Edit</a>
+                        <a type="button" asp-page="/ProductGalleryImages/ProductGalleryImagesMenu" asp-route-id="@product.ProductId" class="btn btn-success float-left">Photo Gallery Menu</a>
                     </div>
-                    <div class="container-fluid flex-fill"></div>
-                    <h3><a href="#" class="mt-2 text-danger">@product.ProductName</a></h3>
-                    <p class="text-secondary">@product.ProductDescription</p>
-                    <a type="button" asp-page="/Products/DeleteProduct" asp-route-id="@product.ProductId" class="btn btn-danger float-left">Remove</a>
-                    <a type="button" asp-page="/Products/EditProduct" asp-route-id="@product.ProductId" class="btn btn-info float-left">Edit</a>
-                    <a type="button" asp-page="/ProductGalleryImages/ProductGalleryImagesMenu" asp-route-id="@product.ProductId" class="btn btn-success float-left">Photo Gallery Menu</a>
-                </div>                   
                 }
 
             </div>
@@ -55,3 +55,4 @@
 
 
 
+@*02.07.2022 RM Added Comments*@
